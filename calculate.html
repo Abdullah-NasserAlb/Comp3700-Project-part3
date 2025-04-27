@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducateMe - Calculate Bill</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="text-white text-center py-3" id="header">
+        <img src="images/logo.jpg" alt="EducateMe Logo" class="logo mb-3" style="width: 150px;">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="course-catalog.html" class="nav-link">Courses</a></li>
+                        <li class="nav-item"><a href="teacher-dashboard.html" class="nav-link">Teacher Dashboard</a></li>
+                        <li class="nav-item"><a href="student-profile.html" class="nav-link">Student Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container py-5">
+        <h1 class="text-center mb-4">Bill Calculation</h1>
+
+        <!-- Bill Calculation Form -->
+        <form id="calculate-form">
+            <div class="mb-3">
+                <label for="item-price" class="form-label">Course Price ($)</label>
+                <input type="number" class="form-control" id="item-price" required />
+            </div>
+            <div class="mb-3">
+                <label for="item-quantity" class="form-label">Number of Courses</label>
+                <input type="number" class="form-control" id="item-quantity" required />
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Your Age</label>
+                <input type="number" class="form-control" id="age" required />
+            </div>
+            <button type="submit" class="btn btn-success">Calculate</button>
+        </form>
+
+        <!-- Result Display Section -->
+        <div id="result" class="mt-4"></div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="text-white text-center py-3" id="footer">
+        <p>&copy; 2025 EducateMe - All Rights Reserved</p>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link text-white">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Section -->
+    <script>
+        /**
+         * Set background color for header and footer dynamically
+         */
+        document.getElementById("header").style.backgroundColor = "#2c3e50";
+        document.getElementById("footer").style.backgroundColor = "#2c3e50";
+
+        /**
+         * Handle the calculation of the total bill based on item price, quantity, and customer's age
+         * Apply a 10% discount for customers leas than 20 years old
+         */
+        document.getElementById('calculate-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const price = parseFloat(document.getElementById('item-price').value);
+            const quantity = parseInt(document.getElementById('item-quantity').value);
+            const age = parseInt(document.getElementById('age').value);
+
+            let total = price * quantity; // Calculate total price
+
+            if (age < 20) {
+                total *= 0.9; // Apply 10% discount for seniors
+            }
+
+            // Display the final total bill
+            document.getElementById('result').innerHTML = `<h3>Total Bill: $${total.toFixed(2)}</h3>`;
+        });
+    </script>
+
+</body>
+</html>

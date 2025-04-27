@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducateMe - Teacher Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="text-white text-center py-3" id="header">
+        <img src="images/logo.jpg" alt="EducateMe Logo" class="mb-3" style="width: 150px;">
+        <nav class="navbar navbar-expand-lg navbar-dark ">
+            <div class="container">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="course-catalog.html" class="nav-link">Courses</a></li>
+                        <li class="nav-item"><a href="teacher-dashboard.html" class="nav-link">Teacher Dashboard</a></li>
+                        <li class="nav-item"><a href="student-profile.html" class="nav-link">Student Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container py-5">
+        <section class="mb-5 text-center">
+            <h1>Welcome, Teacher</h1>
+            <p>Here you can manage your courses, assignments, and students.</p>
+            <div class="mb-4">
+                <a href="add-course.html" class="btn btn-dark">Add New Course</a>
+            </div>
+        </section>
+
+        <!-- Course Management Section -->
+        <section class="mb-5">
+            <h2>Course Management</h2>
+            <div class="row">
+                <!-- Individual Course Cards -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="images/web.jpg" class="card-img-top" alt="Web Computing">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="course-detail.html">Introduction to Web Computing</a></h5>
+                            <p class="card-text">Computer Science</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="images/assembly.png" class="card-img-top" alt="Assembly">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="course-detail.html">Computer Organization & Assembly Language</a></h5>
+                            <p class="card-text">Computer Science</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="images/data.png" class="card-img-top" alt="Data Structures">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="course-detail.html">Introduction to Data Structures and Algorithms</a></h5>
+                            <p class="card-text">Computer Science</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Students Section -->
+        <section class="mb-5">
+            <h2>Manage Students</h2>
+            <p>View student progress and manage students here.</p>
+
+            <!-- Search Box -->
+            <div class="mb-3">
+                <input type="text" id="search-student" class="form-control" placeholder="Search for a student by name...">
+            </div>
+
+            <!-- Students Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center" id="student-table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Progress (%)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table-body">
+                        <!-- Student rows will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Add New Student Progress Form -->
+            <h3 class="mt-4">Add New Student Progress</h3>
+            <form id="add-student-form" class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" id="new-student-name" class="form-control" placeholder="Student Name" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" id="new-student-progress" class="form-control" placeholder="Progress %" required min="0" max="100">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Assign Homework Section -->
+        <section class="mb-5">
+            <h2>Assign Homework</h2>
+            <form id="homework-form" action="https://httpbin.org/post" method="POST">
+                <div class="mb-3">
+                    <label for="homework-title" class="form-label">Homework Title:</label>
+                    <input type="text" id="homework-title" name="homework-title" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="homework-description" class="form-label">Homework Description:</label>
+                    <textarea id="homework-description" name="homework-description" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Assign Homework</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="text-white text-center py-3" id="footer">
+        <p>&copy; 2025 EducateMe - All Rights Reserved</p>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link text-white">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Section -->
+    <script>
+        /**
+         * Set background color for header and footer dynamically
+         */
+        document.getElementById("header").style.backgroundColor = "#2c3e50";
+        document.getElementById("footer").style.backgroundColor = "#2c3e50";
+
+
+        /**
+         * Constructor function to create new Student objects
+         */
+        function Student(name, progress) {
+            this.name = name;
+            this.progress = progress;
+        }
+
+        /**
+         * Initial array containing sample students
+         */
+        let students = [
+            new Student("Ahmed Said", 80),
+            new Student("Khalid Suliman", 75),
+            new Student("Alia Salim", 90)
+        ];
+
+        /**
+         * Render the student table based on the given student list
+         */
+        function renderStudentTable(list) {
+            const tableBody = document.getElementById('student-table-body');
+            tableBody.innerHTML = "";
+            list.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td style="color: green;">${student.progress}%</td>
+                    <td><a href="student-feedback.html" class="btn btn-primary btn-sm">Give Feedback</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        /**
+         * Event listener to handle adding new student to the table
+         */
+        document.getElementById('add-student-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const studentName = document.getElementById('new-student-name').value.trim();
+            const studentProgress = parseInt(document.getElementById('new-student-progress').value);
+            if (studentName && !isNaN(studentProgress)) {
+                students.push(new Student(studentName, studentProgress));
+                renderStudentTable(students);
+                this.reset();
+            } else {
+                alert("Please enter valid student name and progress percentage!");
+            }
+        });
+
+        /**
+         * Filter and search students by their name
+         */
+        document.getElementById('search-student').addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredList = students.filter(student => student.name.toLowerCase().includes(searchTerm));
+            renderStudentTable(filteredList);
+        });
+
+        /**
+         * Handle homework form submission
+         */
+        document.getElementById('homework-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Homework assigned successfully!');
+        });
+
+        /**
+         * Initialize page when loaded
+         */
+        window.onload = function() {
+            renderStudentTable(students);
+        };
+
+    </script>
+
+</body>
+</html>

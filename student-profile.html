@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EducateMe - Student Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="text-white text-center py-3" id="header">
+        <img src="images/logo.jpg" alt="EducateMe Logo" class="logo mb-3" style="width: 150px;">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="course-catalog.html" class="nav-link">Courses</a></li>
+                        <li class="nav-item"><a href="teacher-dashboard.html" class="nav-link">Teacher Dashboard</a></li>
+                        <li class="nav-item"><a href="student-profile.html" class="nav-link">Student Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container py-5">
+        
+        <!-- Profile Section -->
+        <section>
+            <h1>Your Profile</h1>
+            <p>Welcome, Student! Here is your profile and progress information.</p>
+        </section>
+
+        <!-- Your Courses Section -->
+        <section>
+            <h2>Your Courses</h2>
+            <div class="row" id="course-list">
+                <!-- Courses will be populated dynamically using JavaScript -->
+            </div>
+
+            <!-- Add New Course Form -->
+            <h3 class="mt-4">Add New Course</h3>
+            <form id="add-course-form" class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" id="new-course-title" class="form-control" placeholder="Course Title" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="new-course-description" class="form-control" placeholder="Course Description" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Add Course</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Your Progress Section -->
+        <section class="mb-5 py-5">
+            <h2>Your Progress</h2>
+            <p>Here is your current progress in each course.</p>
+
+            <!-- Search Box for Progress -->
+            <div class="mb-3">
+                <input type="text" id="search-progress" class="form-control" placeholder="Search by course name...">
+            </div>
+
+            <!-- Progress Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center" id="progress-table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Completion (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Progress rows will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Update Profile Section -->
+        <section>
+            <h2>Update Your Profile</h2>
+            <form id="profile-update-form">
+                <div class="mb-3">
+                    <label for="full-name" class="form-label">Full Name:</label>
+                    <input type="text" id="full-name" name="full-name" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio:</label>
+                    <textarea id="bio" name="bio" class="form-control" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="text-white text-center py-3" id="footer">
+        <p>&copy; 2025 EducateMe - All Rights Reserved</p>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link text-white">Contact Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Section -->
+    <script>
+        /**
+         * Set background color for header and footer dynamically
+         */
+        document.getElementById("header").style.backgroundColor = "#2c3e50";
+        document.getElementById("footer").style.backgroundColor = "#2c3e50";
+
+        /**
+         * Constructor function to create progress objects
+         */
+        function Progress(course, progress) {
+            this.course = course;
+            this.progress = progress;
+        }
+
+        /**
+         * Initial sample data for courses and progress
+         */
+        const courses = [
+            { title: "Introduction to Web Computing", description: "Computer Science", image: "images/web.jpg" },
+            { title: "Computer Organization & Assembly Language", description: "Computer Science", image: "images/assembly.png" },
+            { title: "Introduction to Data Structures and Algorithms", description: "Computer Science", image: "images/data.png" }
+        ];
+
+        let progressList = [
+            new Progress("Introduction to Web Computing", 67),
+            new Progress("Computer Organization & Assembly Language", 33),
+            new Progress("Introduction to Data Structures and Algorithms", 23)
+        ];
+
+        /**
+         * Populate the student's course list dynamically
+         */
+        function populateCourses() {
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = "";
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.classList.add('col-md-4', 'mb-4');
+                courseCard.innerHTML = `
+                    <div class="card">
+                        <img src="${course.image}" class="card-img-top" alt="${course.title}">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="course-detail.html">${course.title}</a></h5>
+                            <p class="card-text">${course.description}</p>
+                        </div>
+                    </div>
+                `;
+                courseList.appendChild(courseCard);
+            });
+        }
+
+        /**
+         * Populate the student's progress table dynamically
+         */
+        function renderProgressTable(list) {
+            const tableBody = document.querySelector('#progress-table tbody');
+            tableBody.innerHTML = "";
+            list.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.course}</td>
+                    <td style="color: green;">${item.progress}%</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        /**
+         * Event listener to add a new course
+         */
+        document.getElementById('add-course-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('new-course-title').value.trim();
+            const description = document.getElementById('new-course-description').value.trim();
+
+            if (title && description) {
+                courses.push({ title: title, description: description, image: "images/default-course.jpg" });
+                populateCourses();
+                this.reset();
+            } else {
+                alert("Please enter valid course title and description!");
+            }
+        });
+
+        /**
+         * Event listener for searching through the progress table
+         */
+        document.getElementById('search-progress').addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredList = progressList.filter(item => item.course.toLowerCase().includes(searchTerm));
+            renderProgressTable(filteredList);
+        });
+
+        /**
+         * Handle profile update form submission
+         */
+        document.getElementById('profile-update-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Your profile has been updated successfully!');
+        });
+
+        /**
+         * Initialize page when loaded
+         */
+        window.onload = function() {
+            populateCourses();
+            renderProgressTable(progressList);
+        };
+
+    </script>
+
+</body>
+</html>
